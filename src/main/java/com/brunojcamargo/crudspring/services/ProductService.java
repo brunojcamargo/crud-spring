@@ -38,8 +38,10 @@ public class ProductService {
         if(!productData.description().isEmpty()) product.setDescription(productData.description());
         if(!(productData.price() == null)) product.setPrice(productData.price());
 
-        this.categoryService.getById(productData.categoryId())
-                .ifPresent(product::setCategory);
+        if(productData.categoryId() != null){
+            this.categoryService.getById(productData.categoryId())
+                    .ifPresent(product::setCategory);
+        }
 
         this.productRepository.save(product);
 
