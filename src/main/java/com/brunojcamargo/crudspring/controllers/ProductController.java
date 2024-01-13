@@ -3,7 +3,6 @@ package com.brunojcamargo.crudspring.controllers;
 import com.brunojcamargo.crudspring.domain.product.Product;
 import com.brunojcamargo.crudspring.domain.product.ProductDTO;
 import com.brunojcamargo.crudspring.services.ProductService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,12 +27,12 @@ public class ProductController {
         return ResponseEntity.ok().body(products);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathParam("id") String id, @RequestBody ProductDTO productData){
+    public ResponseEntity<Product> update(@PathVariable("id") String id, @RequestBody ProductDTO productData){
         Product updatedProduct = this.productService.update(id, productData);
         return ResponseEntity.ok().body(updatedProduct);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Product> delete(@PathParam("id") String id){
+    public ResponseEntity<Product> delete(@PathVariable("id") String id){
         this.productService.delete(id);
         return ResponseEntity.noContent().build();
     }

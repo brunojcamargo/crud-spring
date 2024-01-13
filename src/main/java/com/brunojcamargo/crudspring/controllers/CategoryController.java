@@ -3,7 +3,6 @@ package com.brunojcamargo.crudspring.controllers;
 import com.brunojcamargo.crudspring.domain.category.Category;
 import com.brunojcamargo.crudspring.domain.category.CategoryDTO;
 import com.brunojcamargo.crudspring.services.CategoryService;
-import jakarta.websocket.server.PathParam;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,12 +28,12 @@ public class CategoryController {
         return ResponseEntity.ok().body(categories);
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Category> update(@PathParam("id") String id, @RequestBody CategoryDTO categoryData){
+    public ResponseEntity<Category> update(@PathVariable("id") String id, @RequestBody CategoryDTO categoryData){
         Category updatedCategory = this.categoryService.update(id, categoryData);
         return ResponseEntity.ok().body(updatedCategory);
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<Category> delete(@PathParam("id") String id){
+    public ResponseEntity<Category> delete(@PathVariable("id") String id){
         this.categoryService.delete(id);
         return ResponseEntity.noContent().build();
     }
